@@ -1,1 +1,1 @@
-# klfl1012.github.io
+## Built for 02806 Social Data Analysis and Visualization, Spring 2026 , Assignment 2. (academic usage only, not for commercial use).
