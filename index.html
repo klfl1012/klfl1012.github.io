@@ -185,6 +185,33 @@
 			position: relative; /* keep caption and iframe inside */
         }
 
+		/* inner wrapper to center embedded content on very wide screens */
+		.visual-inner {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			width: 100%;
+		}
+
+		.visual-inner iframe,
+		.visual-inner img {
+			width: 100%;
+			max-width: calc(var(--wide-width) - 3rem); /* leave extra right gutter to avoid clipping */
+			display: block;
+			margin: 0 auto;
+			border: 0;
+			height: auto;
+		}
+
+		/* add extra right padding for B and C to avoid visual clipping on very wide screens */
+		.visual-shell-b .visual-inner,
+		.visual-shell-c .visual-inner {
+			padding-right: 3rem;
+		}
+
+		.visual-inner iframe,
+		.visual-inner img { box-sizing: border-box; }
+
 		/* caption shown inside the visual container */
 		.visual-shell .visual-caption {
 			padding: 1.1rem 1.5rem; /* increased padding around title */
@@ -439,7 +466,9 @@
 				<div class="visual-caption">
 					<h3 class="visual-title">Reporting Heaps: Minute-Level Rounding in Incident Times</h3>
 				</div>
-				<img src="visualisations/section_a_reporting_bias_and_temporal_patterns.png" alt="Minute-level heaping and hourly patterns" loading="lazy" style="display:block;width:100%;height:auto;border:0;" />
+				<div class="visual-inner">
+					<img src="visualisations/section_a_reporting_bias_and_temporal_patterns.png" alt="Minute-level heaping and hourly patterns" loading="lazy" style="height:auto;" />
+				</div>
 				<figcaption class="disclaimer">
 					SFPD incident reports (2003–2025). Panel 1 (Left): Minute heaping: each bar shows the observed count for that minute relative to the uniform‑minute expectation (values >1 indicate excess concentration) and labels report the multiplicative excess. Summary metrics report the share of events occurring on 5‑minute and 15‑minute marks and normalized indices that quantify how much those shares exceed the uniform expectation. Panel 2 (Right): Hourly pattern: bars show each hour’s percent share of records and the line is a 3‑hour centered rolling mean to emphasize the diurnal rhythm while keeping minute‑level heaping separate. Calculations use the subset of records with valid timestamps.
 				</figcaption>
@@ -457,7 +486,7 @@
             However we can compromise this tradeoff by using circular time features (e.g. sin/cos transforms) that preserve the wrap-around structure of time, and by applying smoothing or debiasing methods to mitigate the impact of heaping. Additionally, we need to be careful when fitting data-driven models, as using to small discretizations steps can lead to models reflecting reporting artifacts rather than true signals. 
 
 			<strong class="key-takeaway">Key Takeaway</strong>
-			<strong>Recorded incidents are not ground truth.</strong> They are records of interactions with a reporting system. <strong>Minute-level timestamps reflect administrative habits.</strong> Hourly patterns reflect both behavior and observation. Differences across time or place may reflect reporting intensity as much as actual crime. This has direct consequences for analysis. Models trained on raw (minute) timestamps can learn rounding patterns instead of real signals. A model might learn that crimes happen at :00 or :30, not because they do, but because that is how they are recorded.
+			<strong>We saw that recorded incidents are not ground truth.</strong> They are records of interactions with a reporting system. <strong> Using minute-level timestamps with this dataset is showing administrative habits.</strong> However its hourly patterns reflect both behavior and observation. The differences across time or place may reflect reporting intensity as much as actual crime and has a direct consequences for analysis. If we were to use data-driven models, trained on raw (minute) timestamps, we could end up learning rounding patterns instead of real signals. For example, a model might learn that crimes happen at :00 or :30, not because they do, but because that is how they are recorded.
 			</p>
 		</section>
 
@@ -475,7 +504,9 @@
                 <div class="visual-caption">
                     <h3 class="visual-title">Aggregation Bias and Enforcement Effects in San Francisco Drug Offense Reports (2003–2025)</h3>
                 </div>
-                <iframe src="visualisations/section_b_aggregation_bias_and_hotspots.html" title="Section B aggregation bias and geographic hotspots" loading="lazy" scrolling="no"></iframe>
+				<div class="visual-inner">
+					<iframe src="visualisations/section_b_aggregation_bias_and_hotspots.html" title="Section B aggregation bias and geographic hotspots" loading="lazy" scrolling="no"></iframe>
+				</div>
                     <figcaption class="disclaimer">
                         SFPD incident reports (2003–2025). Panel 1 (Top-left): City total for Drug Offenses with a fitted trendline shows the broad temporal pattern and a visible uptick since 2021. Panel 2 (Top-right): District share heatmap in which each cell reports a district’s percent share of that year’s city total (normalized by annual totals), highlighting divergent local trajectories that the city aggregate hides. Panel 3 (Bottom/map): Police‑district outlines with a 2025 street‑level density overlay using records with valid coordinates, showing concentrated hotspots inside districts. Together these panels illustrate aggregation bias and enforcement effects.
                     </figcaption>
@@ -488,14 +519,16 @@
 
 			Panel B’s percent-share heatmap reveals these divergent district trajectories (e.g. the Tenderloin’s rising share versus declines elsewhere). The visualization highlights that district-level trends are heterogeneous, and that the apparent citywide stability is the result of averaging opposing local dynamics. Importantly, the Tenderloin’s increasing share may reflect a true rise in underlying activity, but it could also be driven by increased policing intensity or reporting practices (i.e. enforcement effects). Furthermore, since 2021, reported Drug Offenses have risen in ways that may reflect shifts in policy and enforcement tied to the opioid crisis rather than only higher prevalence. For example, large fentanyl seizures and a surge in drug-related citations and arrests in 2023–2024 around the Tenderloin could drive up recorded incidents and warrants (see <a href="https://en.wikipedia.org/wiki/California_opioid_crisis#Reactions" target="_blank" rel="noopener noreferrer">California opioid crisis</a>).
 
-			Panel C combines a district-level choropleth with street-level density, revealing pronounced intra-district clustering and concentration along district boundaries. These patterns show that even district-level aggregates obscure meaningful within-district variation. For example, districts adjacent to the Tenderloin (a known hotspot), such as Northern, exhibit elevated incident counts near shared borders, while other parts of the same district show relatively low activity. This illustrates that crime is highly localized, and aggregation at the district level can conceal these fine-grained spatial patterns.
+			Panel C combines a district-level choropleth with street-level density, revealing pronounced intra-district clustering and concentration along district boundaries. These patterns show that even district-level aggregates obscure meaningful within-district variation. For example, districts adjacent to the Tenderloin (a known drug market hotspot), such as Northern, exhibit elevated incident counts near shared borders, while other parts of the same district show relatively low activity. This illustrates that crime is highly localized, and aggregation at the district level can conceal these fine-grained spatial patterns.
 
 			Taken together, raw counts are descriptive but not causal. Drawing causal inferences requires accounting for exposure, enforcement, and uncertainty. Moving from observed reports to causal claims necessitates additional data on enforcement practices (e.g. patrol allocation, response activity) and community reporting behavior.
 
             To reduce this risk of misinterpretation, as mentioned above by normalizing counts and including exposure measures, and showing disaggregated views (e.g. small multiples of district time series paired with maps) or revealing trends by using hierarchical models that include time-varying enforcement covariates.
 
 			<strong class="key-takeaway">Key Takeaway</strong>
-			<strong>Aggregation flattens critical variation.</strong> <strong>A twofold increase in a district’s share does not necessarily imply a doubling of underlying criminal activity, as it may instead reflect changes in reporting or policing intensity.</strong> Aggregates should be treated as a starting point and then disaggregated to understand where and why patterns differ. Counts should be contextualized with shares, rates, and spatial distributions. Where possible, reported incidents should be paired with enforcement data to help distinguish true prevalence changes from reporting or enforcement effects. Finally, when building predictive models, <strong>avoid relying solely on raw counts since models may otherwise learn reporting artifacts rather than underlying signals.</strong>
+			<strong>We showed that aggregation is flattening critical variation.</strong> <strong>For example, a twofold increase in a district’s share does not necessarily imply a doubling of underlying criminal activity, as it may instead reflect changes in reporting or policing intensity.</strong> Thus, aggregated views should be treated as a starting point and then disaggregated to understand where and why patterns differ. Additionally, counts (e.g. Panel A) should be contextualized with shares, rates, and spatial distributions. 
+			
+			Next time, if possible, we should also pair reported incidents with enforcement data to help better distinguish true prevalence changes from reporting or enforcement effects. Finally, when building predictive models or fitting a trendline, <strong>we need to be cautious about relying solely on raw counts since models may otherwise learn reporting artifacts rather than underlying signals.</strong>
 			</p>
 		</section>
 
@@ -515,29 +548,31 @@
                 <div class="visual-caption">
                     <h3 class="visual-title">Daily Incident Counts: Distributions and Mean-Median Gaps reveal high-crime districts</h3>
                 </div>
-			<iframe src="visualisations/section_c_interactive_embeddable.html" title="Section C interactive robust summaries" loading="lazy" scrolling="no"></iframe>
+				<div class="visual-inner">
+					<iframe src="visualisations/section_c_interactive_embeddable.html" title="Section C interactive robust summaries" loading="lazy" scrolling="no"></iframe>
+				</div>
 				<figcaption class="disclaimer">
-					SFPF incindent reports (2003-2025). Panel A (Left): District comparison using bars to plot district-level summary (median, mean, 10% trimmed mean (removing the lowest and highest 10% of values), or IQR (25th-75th percentile)) of daily incident counts, shown as a ratio to the city average (values >1 above-average districts). Colors flag large deviations. Panel B (Center): Violin plots all districts show daily volatility, medians, and spread to reveal frequent spikes versus typical days. Panel C (Right): Mean-median gap using bars display (mean - median)/median (%) to flag skew from rare high-count days. Interactive dropdown switches metric for Panel 1 and slider switches year filter for all panels. The plot shows how summary choice and skewness alter comparative conclusions and why robust summaries are essential for interpreting district-level incident patterns.
+					SFPD incindent reports (2003-2025). Panel A (Left): District comparison using bars to plot district-level summary (median, mean, 10% trimmed mean (removing the lowest and highest 10% of values), or IQR (25th-75th percentile)) of daily incident counts, shown as a ratio to the city average (values >1 above-average districts). Colors flag large deviations. Panel B (Center): Violin plots all districts show daily volatility, medians, and spread to reveal frequent spikes versus typical days. Panel C (Right): Mean-median gap using bars display (mean - median)/median (%) to flag skew from rare high-count days. Interactive dropdown switches metric for Panel 1 and slider switches year filter for all panels. The plot shows how summary choice and skewness alter comparative conclusions and why robust summaries are essential for interpreting district-level incident patterns.
 				</figcaption>
 			</figure>
 		</section>
 
  		<section class="conclusion" aria-label="Conclusion">
  			<p>
-             <strong>City-level averages are easy to read, but they can be misleading when distributions are skewed.</strong> With the figure above, we address that problem using a guided layout: one default comparison plus a small set of summaries. For the analysis we focus on 2025 and use the median.
+            <strong>City-level averages are easy to read, but they can be misleading when distributions are skewed.</strong> With the figure above, we address that problem using a guided layout: one default comparison plus a small set of summaries. For the analysis we focus on 2025 and use the median.
 
  			In Panel 1, Southern is clearly above the city reference at about 1.6, while Park and Richmond are far below at roughly 0.43. Even before interacting, the figure shows district differences. But this first comparison is only a starting point. As shown in Section B, a single summary metric can hide whether a district’s value reflects typical days or a few extreme days.
 
-            Panel 2 adds the missing context by showing distributions for all districts. Southern is not only high on average; its distribution is broader and extends further upward, indicating more day-to-day volatility and a heavier upper tail. Richmond and Park are also elevated, but their distributions are much tighter and more centered than Southern's. This matters because two districts can have similar central summaries (e.g. mean or median) yet differ greatly in the risk of high-incident days. By showing spread in Panel 2, we avoid overconfident interpretations based on a single bar in Panel 1. For example, if we only looked at the mean in Panel 1, we might conclude that the neighboring districts Tenderloin and Northern (both about 1.28 above the city median) have similar risk profiles. Panel 2 shows Tenderloin has a much wider distribution and a heavier upper tail than Northern, so Tenderloin has a higher potential for high-incident days.
+            Panel 2 adds the missing context by showing distributions for all districts. Southern is not only high on average, its distribution is broader and extends further upward, indicating more day-to-day volatility and a heavier upper tail. Richmond and Park are also elevated, but their distributions are much tighter and more centered than Southern's. This matters because two districts can have similar central summaries (e.g. mean or median) yet differ greatly in the risk of high-incident days. By showing spread in Panel 2, we avoid overconfident interpretations based on a single bar in Panel 1. For example, if we only looked at the mean in Panel 1, we might conclude that the neighboring districts Tenderloin and Northern (both about 1.28 above the city median) have similar risk profiles. Panel 2 shows Tenderloin has a much wider distribution and a heavier upper tail than Northern, so Tenderloin has a higher potential for high-incident days.
 
-			Panel 3 quantifies skew directly using the mean–median gap. Richmond has the largest positive gap (~12%), Tenderloin and Mission are about 6% each, indicating their means are pulled upward by occasional spikes. Southern, by contrast, appears near 1.9% and has one of the smallest gaps. That is important for interpreting Panels 1 and 2: Southern’s high level in Panels 1 and 3 suggests structural elevation rather than a single outlier. However, Panel 2's wider distribution for Southern complicates that view. This example shows that no single summary captures the full story; combining plots and metrics gives a clearer picture.
+			Panel 3 quantifies skew directly using the mean–median gap. Richmond has the largest positive gap (~12%), Tenderloin and Mission are about 6% each, indicating their means are pulled upward by occasional spikes. Southern, by contrast, appears near 1.9% and has one of the smallest gaps. That is important for interpreting Panels 1 and 2: Southern’s high level in Panels 1 and 3 suggests structural elevation rather than a single outlier. However, Panel 2's wider distribution for Southern complicates that view. This example shows that no single summary captures the full story and that combining plots and metrics gives a clearer picture.
 
             Bayview provides a useful contrast. In Panel 1 it sits close to the city average (~0.93), Panel 2 shows a tighter distribution, and Panel 3 has a mean–median gap near zero. Together, these suggest Bayview’s level is relatively stable and not driven by outlier days. In other words, districts differ not only in level but also in how reliable a given summary is.
 
 			<strong class="key-takeaway">Final Takeaway</strong>
-			To sum up, we found out the following: In Section A we showed that minute-level timestamps are often rounded. Section B explored how citywide averages can hide very different districts trajectories (e.g. Tenderloin, where enforcement shifts may drive reported increases). Lastly, in this Section we domstrated that using simple tools such as median, distributions and mean-median gaps together, testing them interactively can separate robust patterns from spike-driven artifacts. 
+			To sum up: In Section A we showed that <strong>minute-level timestamps are often rounded</strong>, highlighting measurement bias in how the data is recorded. Section B explored how <strong>citywide averages can hide very different district trajectories</strong> (e.g. Tenderloin, where enforcement shifts may drive reported increases). Lastly, in this section we demonstrated that using <strong>simple plots such as median, distributions, and mean–median gaps</strong> together (and checking them interactively) can help reduce aggregation bias and reveal skewness, seperating robust patterns from spike-driven artifacts that aggregated summaries could hide.
 			
-			For this data story, we conclude that we should not rely on a single summary or visualization, but instead test multiple ones, check for enforcement or policy changes from different data sources if possible, and carefully use aggregates only as a starting point for interpretation.
+			For this data story, we conclude that we should not rely on a single summary or visualisation, as this can reinforce aggregation bias and mislead interpretations of crime patterns. Instead, we should test multiple summaries, examine distributions, and explicitly check for for skewness in daily incident counts. Finally, we should always be aware of possible reporting and measurement biases, as well as enforcement effects (e.g. changes in policing practices, reporting behavior, or policy changes) that affect how incidents are recorded across districts when plotting data. We should therefore not solely base our interpretations on aggregates when drawing conclusions about crime levels or risk in different districts.
 			</p>
 		</section>
 
