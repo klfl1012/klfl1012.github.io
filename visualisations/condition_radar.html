@@ -1,0 +1,220 @@
+<html>
+<head><meta charset="utf-8" /></head>
+<body>
+<style>
+.group-toggle {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    padding: 12px 0 4px;
+    background: white;
+    flex-wrap: wrap;
+}
+.group-toggle button {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 7px 22px;
+    border-radius: 999px;
+    border: 2px solid #d0d5dd;
+    background: #f9fafb;
+    color: #344054;
+    cursor: pointer;
+    transition: all 0.18s ease;
+    letter-spacing: 0.02em;
+}
+.group-toggle button:hover  { border-color: #888; background: #f0f0f0; }
+.group-toggle button.active { background: #1f2d2e; color: white; border-color: #1f2d2e; }
+
+.dropdowns-wrap {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    padding: 10px 0 4px;
+    background: white;
+    flex-wrap: wrap;
+}
+.panel-select-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+}
+.panel-select-wrap label {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    color: #aab0bb;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+.panel-select-wrap select {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    padding: 6px 28px 6px 12px;
+    border-radius: 8px;
+    border: 2px solid #d0d5dd;
+    background: #f9fafb;
+    color: #344054;
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23667085' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    min-width: 180px;
+    transition: border-color 0.18s;
+}
+.panel-select-wrap select:focus {
+    outline: none;
+    border-color: #1f2d2e;
+}
+</style>
+
+<div class="group-toggle" id="group-toggle">
+  <button class="active" onclick="switchGroup('All')">All</button>
+  <button onclick="switchGroup('Driver')">Driver</button>
+  <button onclick="switchGroup('Passenger')">Passenger</button>
+  <button onclick="switchGroup('Pedestrian')">Pedestrian</button>
+  <button onclick="switchGroup('Cyclist')">Cyclist</button>
+</div>
+<div class="dropdowns-wrap">
+  
+    <div class="panel-select-wrap">
+      <label>Panel 1</label>
+      <select id="street-select-0" onchange="switchStreet(0, this.value)">
+        <option value="105TH PL" >105Th Pl</option>
+<option value="59TH ST" >59Th St</option>
+<option value="71ST ST" >71St St</option>
+<option value="ASHLAND AVE" >Ashland Ave</option>
+<option value="CICERO AVE" >Cicero Ave</option>
+<option value="DAMEN AVE" >Damen Ave</option>
+<option value="DR MARTIN LUTHER KING JR DR" >Dr Martin Luther King Jr Dr</option>
+<option value="HALSTED ST" >Halsted St</option>
+<option value="LAKE SHORE DR NB" >Lake Shore Dr Nb</option>
+<option value="MILWAUKEE AVE" >Milwaukee Ave</option>
+<option value="PULASKI RD" >Pulaski Rd</option>
+<option value="RUSSELL DR" >Russell Dr</option>
+<option value="TAYLOR ST" >Taylor St</option>
+<option value="VERMONT ST" >Vermont St</option>
+<option value="WESTERN AVE" selected>Western Ave</option>
+      </select>
+    </div>
+    <div class="panel-select-wrap">
+      <label>Panel 2</label>
+      <select id="street-select-1" onchange="switchStreet(1, this.value)">
+        <option value="105TH PL" >105Th Pl</option>
+<option value="59TH ST" >59Th St</option>
+<option value="71ST ST" >71St St</option>
+<option value="ASHLAND AVE" >Ashland Ave</option>
+<option value="CICERO AVE" >Cicero Ave</option>
+<option value="DAMEN AVE" >Damen Ave</option>
+<option value="DR MARTIN LUTHER KING JR DR" >Dr Martin Luther King Jr Dr</option>
+<option value="HALSTED ST" >Halsted St</option>
+<option value="LAKE SHORE DR NB" selected>Lake Shore Dr Nb</option>
+<option value="MILWAUKEE AVE" >Milwaukee Ave</option>
+<option value="PULASKI RD" >Pulaski Rd</option>
+<option value="RUSSELL DR" >Russell Dr</option>
+<option value="TAYLOR ST" >Taylor St</option>
+<option value="VERMONT ST" >Vermont St</option>
+<option value="WESTERN AVE" >Western Ave</option>
+      </select>
+    </div>
+    <div class="panel-select-wrap">
+      <label>Panel 3</label>
+      <select id="street-select-2" onchange="switchStreet(2, this.value)">
+        <option value="105TH PL" selected>105Th Pl</option>
+<option value="59TH ST" >59Th St</option>
+<option value="71ST ST" >71St St</option>
+<option value="ASHLAND AVE" >Ashland Ave</option>
+<option value="CICERO AVE" >Cicero Ave</option>
+<option value="DAMEN AVE" >Damen Ave</option>
+<option value="DR MARTIN LUTHER KING JR DR" >Dr Martin Luther King Jr Dr</option>
+<option value="HALSTED ST" >Halsted St</option>
+<option value="LAKE SHORE DR NB" >Lake Shore Dr Nb</option>
+<option value="MILWAUKEE AVE" >Milwaukee Ave</option>
+<option value="PULASKI RD" >Pulaski Rd</option>
+<option value="RUSSELL DR" >Russell Dr</option>
+<option value="TAYLOR ST" >Taylor St</option>
+<option value="VERMONT ST" >Vermont St</option>
+<option value="WESTERN AVE" >Western Ave</option>
+      </select>
+    </div>
+    <div class="panel-select-wrap">
+      <label>Panel 4</label>
+      <select id="street-select-3" onchange="switchStreet(3, this.value)">
+        <option value="105TH PL" >105Th Pl</option>
+<option value="59TH ST" selected>59Th St</option>
+<option value="71ST ST" >71St St</option>
+<option value="ASHLAND AVE" >Ashland Ave</option>
+<option value="CICERO AVE" >Cicero Ave</option>
+<option value="DAMEN AVE" >Damen Ave</option>
+<option value="DR MARTIN LUTHER KING JR DR" >Dr Martin Luther King Jr Dr</option>
+<option value="HALSTED ST" >Halsted St</option>
+<option value="LAKE SHORE DR NB" >Lake Shore Dr Nb</option>
+<option value="MILWAUKEE AVE" >Milwaukee Ave</option>
+<option value="PULASKI RD" >Pulaski Rd</option>
+<option value="RUSSELL DR" >Russell Dr</option>
+<option value="TAYLOR ST" >Taylor St</option>
+<option value="VERMONT ST" >Vermont St</option>
+<option value="WESTERN AVE" >Western Ave</option>
+      </select>
+    </div>
+</div>
+
+    <div>                        <script type="text/javascript">window.PlotlyConfig = {MathJaxConfig: 'local'};</script>
+        <script charset="utf-8" src="https://cdn.plot.ly/plotly-3.3.1.min.js" integrity="sha256-4rD3fugVb/nVJYUv5Ky3v+fYXoouHaBSP20WIJuEiWg=" crossorigin="anonymous"></script>                <div id="610c27d6-a819-48c9-9e8a-9657afc25f4b" class="plotly-graph-div" style="height:500px; width:1600px;"></div>            <script type="text/javascript">                window.PLOTLYENV=window.PLOTLYENV || {};                                if (document.getElementById("610c27d6-a819-48c9-9e8a-9657afc25f4b")) {                    Plotly.newPlot(                        "610c27d6-a819-48c9-9e8a-9657afc25f4b",                        [{"fill":"toself","fillcolor":"rgba(112, 118, 133, 0.6)","hoverinfo":"skip","line":{"color":"rgba(112, 118, 133, 0.6)","dash":"dashdot","width":2},"mode":"lines","name":"City-wide avg","opacity":0.3,"r":[1.1930309567922233,1.4241731726200926,0.8263285510465999,1.4240544374862085,1.868393848470424,1.1930309567922233],"showlegend":true,"theta":["Wet road","Darkness","Bad weather","Outside of Peak hour","Intersection","Wet road"],"type":"scatterpolar","subplot":"polar"},{"fill":"toself","fillcolor":"rgb(0.125, 0.314, 0.733)","hovertemplate":"\u003cb\u003eWESTERN AVE\u003c\u002fb\u003e\u003cbr\u003e%{theta}: %{r:.2f}x\u003cextra\u003e\u003c\u002fextra\u003e","line":{"color":"rgb(0.125, 0.314, 0.733)","width":2},"marker":{"color":"rgb(0.125, 0.314, 0.733)","size":6},"name":"WESTERN AVE","opacity":0.375,"r":[1.344900153444019,1.715351116779456,0.931798021707476,1.7776348823516983,1.893921314753867,1.344900153444019],"showlegend":true,"theta":["Wet road","Darkness","Bad weather","Outside of Peak hour","Intersection","Wet road"],"type":"scatterpolar","subplot":"polar"},{"fill":"toself","fillcolor":"rgba(112, 118, 133, 0.6)","hoverinfo":"skip","line":{"color":"rgba(112, 118, 133, 0.6)","dash":"dashdot","width":2},"mode":"lines","name":"City-wide avg","opacity":0.3,"r":[1.1930309567922233,1.4241731726200926,0.8263285510465999,1.4240544374862085,1.868393848470424,1.1930309567922233],"showlegend":false,"theta":["Wet road","Darkness","Bad weather","Outside of Peak hour","Intersection","Wet road"],"type":"scatterpolar","subplot":"polar2"},{"fill":"toself","fillcolor":"rgb(0.988, 0.510, 0.341)","hovertemplate":"\u003cb\u003eLAKE SHORE DR NB\u003c\u002fb\u003e\u003cbr\u003e%{theta}: %{r:.2f}x\u003cextra\u003e\u003c\u002fextra\u003e","line":{"color":"rgb(0.988, 0.510, 0.341)","width":2},"marker":{"color":"rgb(0.988, 0.510, 0.341)","size":6},"name":"LAKE SHORE DR NB","opacity":0.375,"r":[0.673545869704616,1.5756560086009914,0.4968880532901302,1.6482853111605646,0.7127308209801625,0.673545869704616],"showlegend":true,"theta":["Wet road","Darkness","Bad weather","Outside of Peak hour","Intersection","Wet road"],"type":"scatterpolar","subplot":"polar2"},{"fill":"toself","fillcolor":"rgba(112, 118, 133, 0.6)","hoverinfo":"skip","line":{"color":"rgba(112, 118, 133, 0.6)","dash":"dashdot","width":2},"mode":"lines","name":"City-wide avg","opacity":0.3,"r":[1.1930309567922233,1.4241731726200926,0.8263285510465999,1.4240544374862085,1.868393848470424,1.1930309567922233],"showlegend":false,"theta":["Wet road","Darkness","Bad weather","Outside of Peak hour","Intersection","Wet road"],"type":"scatterpolar","subplot":"polar3"},{"fill":"toself","fillcolor":"rgb(0.216, 0.494, 0.498)","hovertemplate":"\u003cb\u003e105TH PL\u003c\u002fb\u003e\u003cbr\u003e%{theta}: %{r:.2f}x\u003cextra\u003e\u003c\u002fextra\u003e","line":{"color":"rgb(0.216, 0.494, 0.498)","width":2},"marker":{"color":"rgb(0.216, 0.494, 0.498)","size":6},"name":"105TH PL","opacity":0.375,"r":[2.73333331092,0.0,0.0,0.0,0.0,2.73333331092],"showlegend":true,"theta":["Wet road","Darkness","Bad weather","Outside of Peak hour","Intersection","Wet road"],"type":"scatterpolar","subplot":"polar3"},{"fill":"toself","fillcolor":"rgba(112, 118, 133, 0.6)","hoverinfo":"skip","line":{"color":"rgba(112, 118, 133, 0.6)","dash":"dashdot","width":2},"mode":"lines","name":"City-wide avg","opacity":0.3,"r":[1.1930309567922233,1.4241731726200926,0.8263285510465999,1.4240544374862085,1.868393848470424,1.1930309567922233],"showlegend":false,"theta":["Wet road","Darkness","Bad weather","Outside of Peak hour","Intersection","Wet road"],"type":"scatterpolar","subplot":"polar4"},{"fill":"toself","fillcolor":"rgb(0.463, 0.082, 0.733)","hovertemplate":"\u003cb\u003e59TH ST\u003c\u002fb\u003e\u003cbr\u003e%{theta}: %{r:.2f}x\u003cextra\u003e\u003c\u002fextra\u003e","line":{"color":"rgb(0.463, 0.082, 0.733)","width":2},"marker":{"color":"rgb(0.463, 0.082, 0.733)","size":6},"name":"59TH ST","opacity":0.375,"r":[0.9712027030702379,1.5503960610397578,0.6474684703274712,1.4929475540029902,2.073301831744972,0.9712027030702379],"showlegend":true,"theta":["Wet road","Darkness","Bad weather","Outside of Peak hour","Intersection","Wet road"],"type":"scatterpolar","subplot":"polar4"}],                        {"template":{"data":{"scatter":[{"type":"scatter"}]}},"polar":{"domain":{"x":[0.0,0.2275],"y":[0.0,1.0]},"radialaxis":{"tickfont":{"color":"#262626","size":8,"family":"Tiempos Text Font"},"range":[0,3],"showticklabels":true,"tickvals":[0,0.5,1,1.5,2,2.5],"gridcolor":"#D4D4D4"},"angularaxis":{"tickfont":{"family":"Tiempos Text Font","size":14,"color":"#262626"}}},"polar2":{"domain":{"x":[0.2575,0.485],"y":[0.0,1.0]},"radialaxis":{"tickfont":{"color":"#262626","size":8,"family":"Tiempos Text Font"},"range":[0,3],"showticklabels":true,"tickvals":[0,0.5,1,1.5,2,2.5],"gridcolor":"#D4D4D4"},"angularaxis":{"tickfont":{"family":"Tiempos Text Font","size":14,"color":"#262626"}}},"polar3":{"domain":{"x":[0.515,0.7425],"y":[0.0,1.0]},"radialaxis":{"tickfont":{"color":"#262626","size":8,"family":"Tiempos Text Font"},"range":[0,3],"showticklabels":true,"tickvals":[0,0.5,1,1.5,2,2.5],"gridcolor":"#D4D4D4"},"angularaxis":{"tickfont":{"family":"Tiempos Text Font","size":14,"color":"#262626"}}},"polar4":{"domain":{"x":[0.7725,1.0],"y":[0.0,1.0]},"radialaxis":{"tickfont":{"color":"#262626","size":8,"family":"Tiempos Text Font"},"range":[0,3],"showticklabels":true,"tickvals":[0,0.5,1,1.5,2,2.5],"gridcolor":"#D4D4D4"},"angularaxis":{"tickfont":{"family":"Tiempos Text Font","size":14,"color":"#262626"}}},"annotations":[{"font":{"size":14,"color":"#262626","family":"Tiempos Text Font"},"showarrow":false,"text":"WESTERN AVE","x":0.11375,"xanchor":"center","xref":"paper","y":1.0,"yanchor":"bottom","yref":"paper","yshift":20},{"font":{"size":14,"color":"#262626","family":"Tiempos Text Font"},"showarrow":false,"text":"LAKE SHORE DR NB","x":0.37124999999999997,"xanchor":"center","xref":"paper","y":1.0,"yanchor":"bottom","yref":"paper","yshift":20},{"font":{"size":14,"color":"#262626","family":"Tiempos Text Font"},"showarrow":false,"text":"105TH PL","x":0.62875,"xanchor":"center","xref":"paper","y":1.0,"yanchor":"bottom","yref":"paper","yshift":20},{"font":{"size":14,"color":"#262626","family":"Tiempos Text Font"},"showarrow":false,"text":"59TH ST","x":0.88625,"xanchor":"center","xref":"paper","y":1.0,"yanchor":"bottom","yref":"paper","yshift":20}],"title":{"text":"","x":0.01,"xanchor":"left"},"font":{"family":"Tiempos Text Font","size":18,"color":"#262626"},"margin":{"l":40,"r":40,"t":150,"b":120},"height":500,"paper_bgcolor":"white","plot_bgcolor":"white","xaxis":{"title":{"font":{"color":"#262626"}},"showgrid":true,"gridcolor":"rgba(0,0,0,0.08)","linecolor":"#D4D4D4","tickcolor":"#D4D4D4","linewidth":2},"yaxis":{"title":{"font":{"color":"#262626"}},"showgrid":true,"gridcolor":"rgba(0,0,0,0.08)","linecolor":"#D4D4D4","tickcolor":"#D4D4D4","linewidth":2},"legend":{"font":{"size":14,"color":"#262626","family":"Tiempos Text Font"},"orientation":"h","yanchor":"top","y":-0.25,"xanchor":"center","x":0.5},"hoverlabel":{"font":{"family":"Tiempos Text Font","size":13,"color":"#262626"},"bgcolor":"white","bordercolor":"rgba(112, 118, 133, 0.6)"},"width":1600},                        {"responsive": true}                    )                };            </script>        </div>
+
+<script>
+const RADAR_DATA  = {"All": {"__city__": [1.1930309567922233, 1.4241731726200926, 0.8263285510465999, 1.4240544374862085, 1.868393848470424, 1.1930309567922233], "105TH PL": [2.73333331092, 0.0, 0.0, 0.0, 0.0, 2.73333331092], "59TH ST": [0.9712027030702379, 1.5503960610397578, 0.6474684703274712, 1.4929475540029902, 2.073301831744972, 0.9712027030702379], "71ST ST": [1.119580149870063, 1.2177522940407972, 1.0381561412041493, 1.3416071294888798, 1.852001144011918, 1.119580149870063], "ASHLAND AVE": [1.318810755935101, 1.5938626321676315, 1.0357465273883364, 1.659858030172727, 1.7431447161018734, 1.318810755935101], "CICERO AVE": [1.3089901701482212, 1.66883741813893, 0.9400662426668589, 1.6897006231945528, 2.00363727625364, 1.3089901701482212], "DAMEN AVE": [0.9195885444905689, 1.3242633254628726, 0.6538551197869641, 1.5141384331491687, 1.8489017598074973, 0.9195885444905689], "DR MARTIN LUTHER KING JR DR": [1.3366258915086944, 1.3247863198608372, 1.0524301520896686, 1.3243299788268292, 1.5824561350371558, 1.3366258915086944], "HALSTED ST": [0.9784870738369101, 1.299472548202807, 0.733158341544095, 1.3570570021517756, 1.470112525553671, 0.9784870738369101], "LAKE SHORE DR NB": [0.673545869704616, 1.5756560086009914, 0.4968880532901302, 1.6482853111605646, 0.7127308209801625, 0.673545869704616], "MILWAUKEE AVE": [1.2467978440256327, 1.0231675605764234, 0.7622566413306433, 1.0773212970362627, 1.7165278012314695, 1.2467978440256327], "PULASKI RD": [1.1645474478870677, 1.4758314289680365, 0.9416829147643322, 1.4967728061389225, 1.897710118825852, 1.1645474478870677], "RUSSELL DR": [1.2619047523503402, 1.358974353433925, 2.2083333235798612, 0.9298245588097875, 2.9444443924259267, 1.2619047523503402], "TAYLOR ST": [0.926740993319996, 1.6778645753844499, 0.7288461495964201, 1.5147881625806787, 1.4831171684964093, 0.926740993319996], "VERMONT ST": [0.0, 1.5749999950387499, 0.0, 0.3351063820803531, 0.8915094318428266, 0.0], "WESTERN AVE": [1.344900153444019, 1.715351116779456, 0.931798021707476, 1.7776348823516983, 1.893921314753867, 1.344900153444019]}, "Driver": {"__city__": [1.2042923812747486, 1.4433704681026598, 0.7775827101165157, 1.4529133033240929, 1.9296638530759909, 1.2042923812747486], "105TH PL": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0], "59TH ST": [0.8048076858305382, 1.48799999446464, 0.7851782326987193, 1.4684210480110207, 2.456603760652973, 0.8048076858305382], "71ST ST": [0.8291225286161887, 1.2702528303662184, 0.8526904181843313, 1.2567907079697938, 2.246639401525118, 0.8291225286161887], "ASHLAND AVE": [1.1382770950842573, 1.6645955487327242, 0.9055400678236076, 1.8389875465063514, 1.6839060002122166, 1.1382770950842573], "CICERO AVE": [1.334662121996789, 1.693034701205096, 0.8133980518545926, 1.7704333478983028, 2.201696891294738, 1.334662121996789], "DAMEN AVE": [0.7216712559408476, 1.2694502950476805, 0.3666135563236813, 1.3686344897397964, 2.1560052011349367, 0.7216712559408476], "DR MARTIN LUTHER KING JR DR": [0.8269376546594253, 1.5041320182658025, 0.776372746621259, 1.4100607737596864, 1.644397520346107, 0.8269376546594253], "HALSTED ST": [0.5695951556958123, 1.4612955805508347, 0.5518212635688495, 1.4632788257392577, 1.2300797530730616, 0.5695951556958123], "LAKE SHORE DR NB": [0.7020494731251554, 1.4975799876645377, 0.42176548957267057, 1.5209440039849866, 0.3112205590267332, 0.7020494731251554], "MILWAUKEE AVE": [1.5499263502861378, 0.8212251237134768, 0.6116064727770024, 1.1543196292138633, 1.8856657762027436, 1.5499263502861378], "PULASKI RD": [1.180879008969819, 1.8066569669086694, 1.1071682726402372, 1.6491867545975583, 1.8195616558664276, 1.180879008969819], "RUSSELL DR": [2.5833333133125, 2.2962962883868308, 2.2962962883868308, 1.4761904729217685, 0.0, 2.5833333133125], "TAYLOR ST": [2.1695941649446153, 2.438393452059652, 1.3916083832165715, 1.8976477973759414, 1.5835543701379493, 2.1695941649446153], "VERMONT ST": [0.0, 1.1805555513744213, 0.0, 0.9444444417685184, 0.8854166643147785, 0.0], "WESTERN AVE": [1.3556502545238618, 1.69241218953571, 0.9579888115487631, 1.7416001496708091, 1.6621137840826412, 1.3556502545238618]}, "Passenger": {"__city__": [1.07947756764715, 1.4514699212595488, 0.8512659029637022, 1.5655722465403785, 1.6085857073541752, 1.07947756764715], "105TH PL": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0], "59TH ST": [0.7888888839101235, 1.5450049403903292, 0.4595469230321425, 1.7580952323889631, 1.8614232150339602, 0.7888888839101235], "71ST ST": [1.2176308458400535, 1.217630850230904, 1.006480989777358, 1.4907251220310254, 1.5574348079124394, 1.2176308458400535], "ASHLAND AVE": [1.4541520651926922, 1.4715342040330475, 1.1857199664310607, 1.5810592633512643, 1.618206303092475, 1.4541520651926922], "CICERO AVE": [1.295104717843807, 1.5031852760563011, 1.0087130986638024, 1.5210676421760603, 1.7307729603853772, 1.295104717843807], "DAMEN AVE": [0.970118346434241, 1.4932245017517791, 0.8286274185677026, 1.7169264362754997, 1.8747793191663886, 0.970118346434241], "DR MARTIN LUTHER KING JR DR": [1.4184535317035092, 1.2962483087370182, 0.9596371290649159, 1.538768791993772, 1.5696002260711834, 1.4184535317035092], "HALSTED ST": [0.9904463385206761, 1.1926624699611836, 0.7653448990891518, 1.3501839282058383, 1.553176112598503, 0.9904463385206761], "LAKE SHORE DR NB": [0.8217880901082407, 1.4232817301823442, 0.6881623824866384, 1.5709906207533164, 0.8105792014456052, 0.8217880901082407], "MILWAUKEE AVE": [0.916534678667105, 1.2601774134589872, 0.5206758775538283, 1.217803026677811, 1.6934256660294968, 0.916534678667105], "PULASKI RD": [1.0752299543314325, 1.1992150097596364, 0.8068070272953639, 1.2890471160108798, 1.6067182698314189, 1.0752299543314325], "RUSSELL DR": [0.0, 0.0, 3.0, 0.0, 3.0, 0.0], "TAYLOR ST": [0.5539215640250145, 1.769574937361455, 0.37293729164313955, 1.818390797512247, 1.0560747635669054, 0.5539215640250145], "VERMONT ST": [0.0, 1.3333333297777776, 0.0, 0.0, 0.9523809505668934, 0.0], "WESTERN AVE": [1.2715872924594467, 1.625224000342513, 0.8797462795291553, 1.8274758781609965, 1.8003480574883097, 1.2715872924594467]}, "Pedestrian": {"__city__": [1.0450807895331025, 1.1926204926832604, 0.9368561707539839, 1.2261976224525661, 1.0698109948327201, 1.0450807895331025], "105TH PL": [0.9999999989999999, 0.0, 0.0, 0.0, 0.0, 0.9999999989999999], "59TH ST": [1.4615384508579883, 1.7733333265946667, 1.055555549984568, 1.3194444392216433, 1.3039215649841407, 1.4615384508579883], "71ST ST": [1.3155555477674667, 1.3080808036808997, 1.4845678951313441, 1.2333333296826667, 1.1371158356627935, 1.3155555477674667], "ASHLAND AVE": [1.2058714616064357, 1.2147056883632659, 1.0462939495137469, 1.2950631414026836, 1.0234541554431922, 1.2058714616064357], "CICERO AVE": [1.137876572524858, 1.3156985838008026, 0.9708199027117622, 1.3479152394725524, 1.1270770572959965, 1.137876572524858], "DAMEN AVE": [0.8817946463397784, 0.7841031125938752, 0.7781478985228748, 1.1752321941051465, 1.149606296569409, 0.8817946463397784], "DR MARTIN LUTHER KING JR DR": [1.58392433809036, 1.184857691372073, 1.4255319085262412, 1.2497814002500007, 0.9309596153438194, 1.58392433809036], "HALSTED ST": [1.0147105794811617, 1.1408588125901946, 0.8538040133623765, 1.2130392379354733, 0.9395540285925235, 1.0147105794811617], "LAKE SHORE DR NB": [0.44919785753232866, 1.3303167392161503, 0.3529411743529412, 1.2100840315390158, 0.6176470545000001, 0.44919785753232866], "MILWAUKEE AVE": [1.303656214924413, 1.23584327799884, 1.0986394521612868, 1.152395511365939, 1.077744407941605, 1.303656214924413], "PULASKI RD": [0.973764484656165, 1.182004838432198, 0.789389577764842, 1.4161719108053241, 1.107382547567114, 0.973764484656165], "RUSSELL DR": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0], "TAYLOR ST": [0.539999997084, 1.6199999934390001, 0.44999999797500007, 1.5428571369061226, 0.9529411742003461, 0.539999997084], "VERMONT ST": [0.0, 0.9999999989999999, 0.0, 0.0, 0.0, 0.0], "WESTERN AVE": [0.9545927610148952, 1.3952783421473967, 0.9051677302324873, 1.3811906767733815, 1.1059629555125567, 0.9545927610148952]}, "Cyclist": {"__city__": [1.1559579941576317, 1.250735539154985, 1.0322700113902339, 1.3202095572811403, 1.1339487143142073, 1.1559579941576317], "105TH PL": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0], "59TH ST": [3.0, 1.7499999918333335, 0.0, 1.6153846101656804, 1.0499999955900001, 3.0], "71ST ST": [0.0, 0.0, 0.0, 1.3055555487376544, 1.398809520678855, 0.0], "ASHLAND AVE": [0.6984126903643236, 1.4938271537992682, 0.6285714242253062, 1.4152046723541603, 1.047619045204535, 0.6984126903643236], "CICERO AVE": [0.615702475168858, 1.296905218325672, 0.7006269556478759, 1.3796296258228737, 1.1677115957462705, 0.615702475168858], "DAMEN AVE": [1.4469564976617741, 1.4895140592063068, 1.1899313370877997, 1.7317298720771548, 1.1045469596520725, 1.4469564976617741], "DR MARTIN LUTHER KING JR DR": [1.8461538313846155, 0.5829959492077562, 2.01398600080356, 0.7384615349169231, 1.435897432068376, 1.8461538313846155], "HALSTED ST": [1.398809507373512, 0.8411633072473012, 0.7460317413566137, 1.0173160129693033, 1.1042584402646016, 1.398809507373512], "LAKE SHORE DR NB": [0.0, 3.0, 3.0, 2.3749999924791667, 0.6785714267295918, 0.0], "MILWAUKEE AVE": [0.3775779966381219, 0.49709909236417, 0.4953173739287704, 0.7247913340756753, 1.221407620228961, 0.3775779966381219], "PULASKI RD": [1.3660933558292052, 1.4256410195436686, 1.2819499263764107, 1.6105169274621736, 1.0940574537438477, 1.3660933558292052], "RUSSELL DR": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0], "TAYLOR ST": [0.0, 0.0, 0.6874999952734376, 0.0, 1.571428567312925, 0.0], "VERMONT ST": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0], "WESTERN AVE": [1.8333333131666667, 1.3280487756776767, 1.1511627827466198, 1.4142857092852041, 1.0241379284123364, 1.8333333131666667]}};
+const N_PANELS    = 4;
+let currentGroup  = 'All';
+// tracks which street is shown in each panel
+let currentStreets = ["WESTERN AVE", "LAKE SHORE DR NB", "105TH PL", "59TH ST"];
+
+function switchGroup(grp) {
+    currentGroup = grp;
+    document.querySelectorAll('#group-toggle button').forEach(b => {
+        b.classList.toggle('active', b.textContent === grp);
+    });
+    redrawAll();
+}
+
+function switchStreet(panelIdx, street) {
+    currentStreets[panelIdx] = street;
+
+    // update the subtitle annotation for this panel
+    const gd   = document.querySelector('.plotly-graph-div');
+    const anns = gd.layout.annotations ? [...gd.layout.annotations] : [];
+    if (anns[panelIdx]) {
+        anns[panelIdx] = Object.assign({}, anns[panelIdx], {
+            text: street.replace(/\b\w/g, c => c.toUpperCase())
+        });
+        Plotly.relayout(gd, { annotations: anns });
+    }
+
+    redrawAll();
+}
+
+function redrawAll() {
+    const d  = RADAR_DATA[currentGroup];
+    const gd = document.querySelector('.plotly-graph-div');
+
+    const ghostIndices  = [];
+    const streetIndices = [];
+    const ghostR  = [];
+    const streetR = [];
+
+    for (let i = 0; i < N_PANELS; i++) {
+        ghostIndices.push(i * 2);
+        streetIndices.push(i * 2 + 1);
+        ghostR.push(d['__city__']);
+        streetR.push(d[currentStreets[i]] || Array(6).fill(0));
+    }
+
+    Plotly.restyle(gd, { r: ghostR },  ghostIndices);
+    Plotly.restyle(gd, { r: streetR }, streetIndices);
+}
+</script>
+</body>
+</html>
